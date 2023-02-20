@@ -30,7 +30,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({extended:false}));
 app.use(methodOverride("_method"));
 
-
+//fallo en la ruta???
 app.use('/', routes);
 
 app.listen(3000, () => {
