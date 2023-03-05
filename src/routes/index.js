@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/home', (req, res) => {
     res.render('home', {
         title: 'HOME',
        // session: req.session,
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/add', (req, res) => {
+router.get('/home', (req, res) => {
     const data = {
         "name": "John",
         "age": 30,
@@ -24,7 +24,7 @@ router.get('/add', (req, res) => {
     res.render('add', {
         title: 'TEST',
         data: data,
-        helpers: req.handlebars.helpers,
+        //helpers: req.handlebars.helpers,
      }); 
 });
 

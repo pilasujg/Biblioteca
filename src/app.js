@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import routes from './routes/index.js';
 import myhandlebars  from 'express-handlebars';
 let  handlebars  = myhandlebars;
 import path from "path";
@@ -27,9 +26,9 @@ app.set("views", path.join(__dirname, "views"));
 
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
-    layoutsDir: path.join(__dirname, 'views', 'layouts'),
-    defaultLayout: 'layout.hbs',
-    partialsDir: [path.join(__dirname, 'views')]
+    layoutsDir: path.join(app.get('views'), 'layouts'),
+    defaultLayout: 'main',
+    partialsDir: [path.join(app.get('views'), 'partials')]
 }));
 
 app.set("view engine", ".hbs");

@@ -1,3 +1,18 @@
+{{>layouts/main}}
+{{! Path: src/views/layouts/main.hbs }}
+{{! Path: src/views/partials/formtabla.hbs }}
+{{! Path: src/views/partials/header.hbs }}
+{{! Path: src/views/partials/footer.hbs }}
+
+{{#if error}}
+
+<div class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+  
+  {{/if}}
+  
+  {{#if success}}
 
 <header>
   <div class="text-center mt-5">
@@ -17,3 +32,10 @@
 </div>
 </div>
 </div>
+
+{{/if}}
+
+{{! Path: src/views/partials/formtabla.hbs }}
+{{! Path: src/views/partials/header.hbs }}
+{{! Path: src/views/partials/footer.hbs }}
+
