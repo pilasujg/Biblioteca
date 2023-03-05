@@ -1,12 +1,25 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+import dotenv from "dotenv"; 
 dotenv.config();
 
 
-const {LIBROS_WEB_HOST, MONGODB_URI } = process.env;
-const MONGODB_URL = `mongodb://${BIBLIOTECA_WEB_HOST}/${MONGODB_URI}`;
+mongoose.set('strictQuery', false);
 
-(async() => {
-    const db = await mongoose.connect(config.mongodbURL);
-    console.log("DB conectada a:", db.connection.name);
-}) ()
+let dbUrl = 
+    process.env.NODE_ENV === "production" ? process.env.MONGO_URI : process.env.MONGO_URI_LOCAL;
+(async () => {
+    try {
+        await mongoose.connect(dbUrl, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+           
+        })
+        console.log("DB connected!");
+    }
+
+    catch (error) {
+        console.log(error);
+        console.error(error)
+    }    
+    })();
+

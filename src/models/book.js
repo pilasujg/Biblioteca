@@ -12,4 +12,4 @@ const booksSchema = new Schema ({
         versionKey: false
     }
 );
-export default model ("Book", booksSchema)
+export default model ("Libros", booksSchema)
