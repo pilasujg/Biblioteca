@@ -6,10 +6,14 @@ import path from "path";
 import morgan from "morgan";
 import methodOverride from "method-override";
 import { fileURLToPath } from 'url';
-import "./database.js";
+import db from "./lib/db.js";
 import index from './routes/index.js'
+import config from './config.js'
+
+
 //import books from './routes/books.js'
 //import users from './routes/users.js'
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,9 +37,23 @@ app.engine('hbs', handlebars.engine({
 
 app.set("view engine", ".hbs");
 
+
 app.use(morgan("dev"));
 app.use(express.urlencoded({extended:false}));
 app.use(methodOverride("_method"));
+
+handlebars = handlebars.create({
+    helpers: {
+startsWithHttp: (image) => {
+    if(image.startsWith('http')){
+        return '';
+    }
+    else{
+        return 'https://ik.imagekit.io/8b9i0yggb/tr:w-340,h-160/'
+    }
+},
+    }
+});
 
 //fallo en la ruta???
 //app.use('/', books);
@@ -43,7 +61,11 @@ app.use('/', index);
 //app.use('/', users);
 
 
+
 // Path: scr/routes.js
+app.db = db;
+app.config = config;
+app.handlebars = handlebars;
 
 
 export default app;

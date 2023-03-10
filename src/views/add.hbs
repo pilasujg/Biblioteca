@@ -1,18 +1,4 @@
-{{>layouts/main}}
-{{! Path: src/views/layouts/main.hbs }}
-{{! Path: src/views/partials/formtabla.hbs }}
-{{! Path: src/views/partials/header.hbs }}
-{{! Path: src/views/partials/footer.hbs }}
 
-{{#if error}}
-
-<div class="alert alert-danger" role="alert">
-  {{error}}
-</div>
-  
-  {{/if}}
-  
-  {{#if success}}
 
 <header>
   <div class="text-center mt-5">
@@ -23,17 +9,14 @@
 <div class="container">
 <div class="row">
   <div class="col-md-8">
-{{>partials/formtabla}}
-</div>  
-<div class="col-md-4 ">
-<a class="h-100 d-flex align-items-center justify-content center">
-    <img src="/fotos/elmedico.png" alt="el medico" width="150">
-</a>
-</div>
+{{> formtabla}}
+  </div>
+  
+
 </div>
 </div>
 
-{{/if}}
+
 
 {{! Path: src/views/partials/formtabla.hbs }}
 {{! Path: src/views/partials/header.hbs }}

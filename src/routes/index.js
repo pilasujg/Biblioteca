@@ -1,32 +1,70 @@
 import express from 'express';
 const router = express.Router();
+import { default as mongodb } from 'mongodb';
+import { default as mongoose } from 'mongoose';
+import { Schema } from 'mongoose';
 
-router.get('/home', (req, res) => {
+import dotenv from 'dotenv'
+dotenv.config()
+
+
+
+router.get('/home',async (req, res) => {
+    const db = req.app.db;
+      const todos = await db.books.find({}).toArray()
+
     res.render('home', {
+
         title: 'HOME',
+        libros: todos,
+       
        // session: req.session,
-        //helpers: req.handlebars.helpers,
-      // config: req.app.config,
+    //helpers: req.handlebars.helpers,
+       //config: req.app.config,
+    });
+    console.log(todos)
+});
+
+
+
+
+router.get('/add', (req, res) => {
+    res.render('add', {
+        title: 'ADD',
+         // session: req.session,
+
+    });
+});
+
+router.post('/saveBook', async (req, res) => {
+    const db = req.app.db;
+    let trama = req.body.trama;
+    let opinion = req.body.opinion;
+    let titulo = req.body.titulo;
+    let autor = req.body.autor;
+    let genero = req.body.genero;
+    let imagen = req.body.imagen;
+    let doc = {
+        trama: trama,
+        opinion: opinion,
+        titulo: titulo,
+        autor: autor,
+        genero: genero,
+        imagen: imagen
+    }
+
+   await db.books.insertOne({
+       doc
+    }, function (err, doc) {
+        if (err) {
+            res.send("Hubo un error al guardar el libro");
+        } else {
+            res.redirect('/home');
+        }
     });
 });
 
 
-router.get('/home', (req, res) => {
-    const data = {
-        "name": "John",
-        "age": 30,
-        "cars": [
-            { "name": "Ford", "models": ["Fiesta", "Focus", "Mustang"] },
-            { "name": "BMW", "models": ["320", "X3", "X5"] },
-            { "name": "Fiat", "models": ["500", "Panda"] }
-        ]
-    };
-    res.render('add', {
-        title: 'TEST',
-        data: data,
-        //helpers: req.handlebars.helpers,
-     }); 
-});
 
 
 export default router;
