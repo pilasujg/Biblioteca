@@ -4,7 +4,16 @@ body {
     background: rgb(237, 245, 242);
   }
  
-  /* Note: Try to remove the following lines to see the effect of CSS positioning */
+  .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .navbar-brand {
+    padding: 0 15px;
+  }
+
+  
   .affix {
     top: 20px;
   }

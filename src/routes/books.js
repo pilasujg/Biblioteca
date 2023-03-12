@@ -10,7 +10,7 @@ dotenv.config()
 
 
 // rutas para añadir libros
-router.get('/books/add', (req, res) => {
+router.get('/add', (req, res) => {
     res.render('add', {
         title: 'Nuevo libro',
          // session: req.session,
@@ -37,8 +37,7 @@ router.post('/saveBook', async (req, res) => {
 router.get('/edit/:id', async (req, res) => {
     const db = req.app.db;  
     const id = req.params.id;
-    console.log(id)
-    console.log('hola')
+    
     const book = await db.books.findOne({ _id: getId(id) });
     res.render('edit', {
         title: 'EDIT',

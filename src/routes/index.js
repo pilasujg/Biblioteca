@@ -25,7 +25,13 @@ router.get('/home',async (req, res) => {
     console.log(todos)
 });
 
+router.get('/add', (req, res) => {
+  res.render('add', {
+      title: 'Nuevo libro',
+       // session: req.session,
 
+  });
+});
 
 
 export default router;
