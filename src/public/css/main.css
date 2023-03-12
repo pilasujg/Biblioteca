@@ -1,0 +1,11 @@
+body {
+    width: 100%;
+    
+    background: rgb(237, 245, 242);
+  }
+ 
+  /* Note: Try to remove the following lines to see the effect of CSS positioning */
+  .affix {
+    top: 20px;
+  }
+ 

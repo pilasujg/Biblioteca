@@ -11,31 +11,41 @@ import index from './routes/index.js'
 import config from './config.js'
 
 
-//import books from './routes/books.js'
+import books from './routes/books.js'
 //import users from './routes/users.js'
 
 
 
-const __filename = fileURLToPath(import.meta.url);
 
-const __dirname = path.dirname(__filename);
+// inicializaciones
 
 const app = express();
 
-app.set("port", process.env.PORT || 3000);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.set("views", path.join(__dirname, "views"));
+const __filename = fileURLToPath(import.meta.url);
 
+const __dirname = path.dirname(__filename);
+// settings
+
+
+app.set("port", process.env.PORT || 3000);
+app.set("views", path.join(__dirname, "views"));
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     defaultLayout: 'main',
-    partialsDir: [path.join(app.get('views'), 'partials')]
+    partialsDir: (path.join(app.get('views'), 'partials')),
 }));
 
 app.set("view engine", ".hbs");
+
+
+// middlewares
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 
 app.use(morgan("dev"));
@@ -56,9 +66,14 @@ startsWithHttp: (image) => {
 });
 
 //fallo en la ruta???
-//app.use('/', books);
+
+// routes
+
 app.use('/', index);
 //app.use('/', users);
+
+app.use('/books', books);
+//app.use('/users', users);
 
 
 
