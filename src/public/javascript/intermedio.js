@@ -1,4 +1,5 @@
-$(document).on('click', '#guardarBook', function (e) {
+      
+      $(document).on('click', '#guardarBook', function (e) {
         let trama = $('#trama').val();
         let opinion = $('#opinion').val();
         let titulo = $('#titulo').val();
@@ -31,3 +32,34 @@ $(document).on('click', '#guardarBook', function (e) {
             });
 
     });
+
+
+    $(document).on('click', '#editarBook', function (e) {
+        
+        let id = $(this).attr('data-id')
+        console.log("voy a añadir miBIOGRAPHIA " + id + " ************ " + trama)
+
+     //show in modal the book on clicked this is the way to do it
+        
+
+        
+
+
+
+ 
+        $.ajax({
+                method: 'GET',
+                url: '/books/view/:id',
+                data: {
+                    trama: trama,
+                    opinion: opinion,
+                    titulo: titulo,
+                    autor: autor,
+                    genero: genero,
+                    imagen: imagen,
+                    id: id
+                }   
+            })
+
+             console.log("voy a añadir miBIOGRAPHIA " + id + " ************ " + trama)
+     });

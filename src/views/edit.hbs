@@ -2,21 +2,22 @@
 <link rel="stylesheet" href="/css/main.css">
 
 <div class="container-fluid ">
- <form action="/editar/{{doc.id}}" method="POST">
+ <form action="/editar/{{onebook.id}}" method="POST">
  <div class="row mt-5">
     <div class="col-sm-12">
+        <input type="hidden" name="id" value="{{onebook.id}}">
         <label for="titulo">Titulo</label>
-        <input type="text" name="titulo" value="{{book.doc.titulo}}" class="form-control" id="titulo" placeholder="Titulo">
+        <input type="text" name="titulo" value="{{onebook.titulo}}" class="form-control" id="titulo" placeholder="Titulo">
         <label for="autor">Autor</label>
-        <input type="text" name="autor" value="{{book.doc.autor}}" class="form-control" id="autor" placeholder="Autor">
+        <input type="text" name="autor" value="{{onebook.autor}}" class="form-control" id="autor" placeholder="Autor">
         <label for="genero">Genero</label>
-        <input type="text" name="genero" value="{{book.doc.genero}}" class="form-control" id="genero" placeholder="Genero">
+        <input type="text" name="genero" value="{{onebook.genero}}" class="form-control" id="genero" placeholder="Genero">
         <label for="opinion">Opinion</label>
-        <input type="text" name="opinion" value="{{book.doc.opinion}}" class="form-control" id="opinion" placeholder="Opinion">
+        <input type="text" name="opinion" value="{{onebook.opinion}}" class="form-control" id="opinion" placeholder="Opinion">
         <label for="descripcion">Descripcion</label>
-        <input type="text" name="trama" value="{{book.doc.trama}}" class="form-control" id="descripcion" placeholder="Descripcion">
+        <input type="text" name="trama" value="{{onebook.trama}}" class="form-control" id="descripcion" placeholder="Descripcion">
         <label for="image">Imagen</label>
-        <input type="text" name="image" value="{{book.doc.image}}" class="form-control" id="image" placeholder="Imagen">
+        <input type="text" name="image" value="{{onebook.image}}" class="form-control" id="image" placeholder="Imagen">
         <button type="submit" class="btn btn-primary mt-3">Guardar</button>
         <button type="button" class="btn btn-danger mt-3">Cancelar</button>
      

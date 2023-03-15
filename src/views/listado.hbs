@@ -1,0 +1,42 @@
+
+<link rel="stylesheet" href="/css/main.css">
+
+<div class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <h1 class="text-center">Busca tu libro</h1>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-12">
+            <table>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Título</th>
+      <th scope="col">Autor</th>
+      <th scope="col">Género</th>
+    <th scope="col">Opinión</th>
+    <th scope="col">Editar</th>
+    <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each books}}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{doc.titulo}}</td>
+      <td>{{doc.autor}}</td>
+      <td>{{doc.genero}}</td>
+      <td>{{doc.opinion}}</td>
+       <td><a href="/editar/{{doc.id}}">Editar</a></td>
+    <td><a href="/eliminar/{{doc.id}}">Eliminar</a></td>
+    {{/each}}
+    </tr>
+  </tbody>
+   
+ </table>
+           
+        </div>
+    </div>
+</div>

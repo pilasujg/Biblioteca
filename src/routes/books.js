@@ -5,18 +5,15 @@ import { default as mongoose } from 'mongoose';
 import { Schema } from 'mongoose';
 import { getId } from '../models/common.js';
 import dotenv from 'dotenv'
+import { ObjectId } from 'mongodb';
+import { default as book } from '../models/book.js';
+
 dotenv.config()
 
 
 
 // rutas para añadir libros
-router.get('/add', (req, res) => {
-    res.render('add', {
-        title: 'Nuevo libro',
-         // session: req.session,
 
-    });
-});
 
 router.post('/saveBook', async (req, res) => {
     const db = req.app.db;
@@ -26,22 +23,71 @@ router.post('/saveBook', async (req, res) => {
     let autor = req.body.autor;
     let genero = req.body.genero;
     let imagen = req.body.imagen;
-    const libro = new libro({titulo, autor, genero, opinion, trama, imagen});
-    await libro.save();
+    let date = new Date();
+     await db.books.insertOne({
+        trama: trama,
+        opinion: opinion,
+        titulo: titulo,
+        autor: autor,
+        genero: genero,
+        imagen: imagen,
+        fecha: date
+    });
+       
+        
+
     res.redirect('/home');
    
    
 });
 
 // rutas para editar libros
-router.get('/edit/:id', async (req, res) => {
+router.get('/books/edit/:id', async (req, res) => {
     const db = req.app.db;  
     const id = req.params.id;
+    let onebook = await db.books.findOne({_id: ObjectId(id)});
     
-    const book = await db.books.findOne({ _id: getId(id) });
+   
     res.render('edit', {
         title: 'EDIT',
-        book: book,
+        onebook:onebook,
+        helpers: req.handlebars.helpers
+
+        // session: req.session,
+    });
+    console.log(onebook)
+});
+
+// un libro
+router.get('/books/view/:id', async (req, res) => {
+    const db = req.app.db;  
+    const id = req.params.id;
+    let onebook = await db.books.findOne({_id: ObjectId(id)});
+    
+   
+    res.render('view', {
+        title: 'VIEW',
+        onebook:onebook,
+        helpers: req.handlebars.helpers
+
+        // session: req.session,
+    });
+    console.log(onebook)
+});
+
+// listar libros
+router.get('/books/listado', async (req, res) => {
+    const db = req.app.db;
+    let books = await db.books.find({}).toArray();
+    console.log(books);
+    console.log('hola');
+    
+    
+      
+    res.render('listado', {
+        title: 'BOOKS',
+        books: books,
+        helpers: req.handlebars.helpers
         // session: req.session,
     });
 });

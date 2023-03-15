@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/main.css">
-
+ 
 
  <div class="container-fluid ">
            
@@ -26,36 +26,97 @@
     </div>
                 
         </div> 
- <div class="row my-2">
+      <div class="row my-2">
          
    
      {{#each libros}}          
            
-  <div class="card col-2 mx-2 h-40 my-2" style="width: 18rem;">
+      <div class="card col-2 mx-2 h-40 my-2" style="width: 18rem;">
   
-  <div class="card-header">
-    <a>
-   <img src="{{doc.imagen}}" class="card-img-top img-fluid" style="border-radius: 20px;height:150px;min-width:150px;" alt="{{doc.image}}">
-  </a>
+        <div class="card-header">
+          <a>
+          <img src="{{imagen}}" class="card-img-top img-fluid" style="border-radius: 20px;height:150px;min-width:150px;" alt="{{doc.image}}">
+          </a>
+        </div>
+  
+        <div class="card-body overflow-auto" style="border-radius: 20px;height:250px;min-width:150px;">
+          <h4 class="card-title text-center">{{titulo}}</h4>
+          <h6 class="card-title text-center">{{autor}}</h6>
+          <p class="card-text text-center" id="trama1">{{truncate trama}}</p>
+          <p class="card-text text-center">{{genero}}</p>
+          <p class="card-text">Ranking&nbsp; {{opinion}}</p>
+          <div class="position-absolute bottom-0 start-50 translate-middle">
+            <!-- Button trigger modal -->
+            <a href="#viewBook">
+            <button type="button" class="btn btn-primary" id="view" data-bs-toggle="modal" data-bs-target="#viewBook" data-bs-original-title="Mas ..."
+            data-title="{{titulo}}" data-author="{{autor}}" data-genre="{{genero}}" data-opinion="{{opinion}}" data-trama="{{trama}}" data-image="{{imagen}}" data-id="{{_id}}">view
+            </button>
+          </a>
+          </div>
+        </div>
+   </div>
+
+{{/each}}
   </div>
-  
-  <div class="card-body overflow-auto" style="border-radius: 20px;height:200px;min-width:150px;">
-    <h4 class="card-title text-center">{{doc.titulo}}</h4>
-    <h6 class="card-title text-center">{{doc.autor}}</h6>
-    
-    <p class="card-text text-center">{{doc.genero}}</p>
-    <p class="card-text">Ranking&nbsp; {{doc.opinion}}</p>
-    <div class="position-absolute bottom-0 start-50 translate-middle">
-    <a href="/books/edit/{{_id}}" class="btn btn-secondary">view</a>
+        </div>
+        </div>
+        </div>
+          </div>           
+        </div>
+
+<!--I want to do an overlay-->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="viewBook" tabindex="-1"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="title">{{title}}</h1>
+       
+      </div>
+      <div class="modal-body">
+       
+       <div id="autor">  <p>{{../autor}}</p>
+          <p>{{genero}}</p>
+          <p>{{opinion}}</p>
+          <p>{{trama}}</p>
+          </div> 
+        </div>
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       
+      </div>
     </div>
-  </div>
+
+
+    
  
  </div>
-  {{/each}}
+
     
    </div> 
- </div>
-  </div>           
-</div>
+ 
+
+<script>
+function truncate(str, n){
+  return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+};
 
 
+var trama = document.getElementById("trama1").innerHTML;
+console.log(trama)
+
+var trama1 = truncate(trama, 20);
+document.getElementById("trama1").innerHTML = trama1;
+
+
+
+
+
+
+
+</script>

@@ -8,11 +8,12 @@ import methodOverride from "method-override";
 import { fileURLToPath } from 'url';
 import db from "./lib/db.js";
 import index from './routes/index.js'
+import books from './routes/books.js'
+//import users from './routes/users.js'
+
 import config from './config.js'
 
 
-import books from './routes/books.js'
-//import users from './routes/users.js'
 
 
 
@@ -62,18 +63,30 @@ startsWithHttp: (image) => {
         return 'https://ik.imagekit.io/8b9i0yggb/tr:w-340,h-160/'
     }
 },
-    }
+ truncate: (text) => {
+    
+    if( text && text.length > 20){
+    return `${text.substring(0, 20)}...`;}
+    else {
+
+    return text
+  }
+    },
+}
 });
 
 //fallo en la ruta???
-
+app.use((req, res, next) => {
+    req.handlebars = handlebars;
+    next();
+});
 // routes
 
 app.use('/', index);
 //app.use('/', users);
 
-app.use('/books', books);
-//app.use('/users', users);
+app.use('/', books);
+//app.use('/', users);
 
 
 

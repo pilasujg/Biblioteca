@@ -19,13 +19,13 @@ router.get('/home',async (req, res) => {
         libros: todos,
        
        // session: req.session,
-    //helpers: req.handlebars.helpers,
-       //config: req.app.config,
+    helpers: req.handlebars.helpers,
+       config: req.app.config,
     });
-    console.log(todos)
+    
 });
 
-router.get('/add', (req, res) => {
+router.get('/books/add', (req, res) => {
   res.render('add', {
       title: 'Nuevo libro',
        // session: req.session,
