@@ -1,13 +1,57 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 mx-auto">
-        <h1 class="text-center">{{titulo}}</h1>
+<style>
+  .container{
+   
+    position: inherit;
+    height: 100%;
+    width: 100%;
+
+
+  }
+  .card {
+    border-radius: 20px;
+    background-color: antiquewhite;
+    height: 100%;
+    width: 100%;
+    text-size-adjust: auto;
+    text-size-adjust: 100%;
+    font-style: normal;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+  }
+</style>
+
+<body>
+  <div class="container my-5">
+    <div class="row mx-5">
+      
+        <div class="card col-10 mx-2 h-500 my-2">
+  
+        <div class="card-header">
+          <div class="text-center">
+            <h2>{{onebook.titulo}}</h2>
         </div>
-        <div class="row">
-            <div class="col-md-4 mx-auto">
-                <img src="{{imagen}}" class="card-img-top img-fluid" style="border-radius: 20px;height:150px;min-width:150px;" alt="{{doc.image}}">
+        </div>
+  
+            <div class="card-body">
+              
+              <h5 class="card-title text-center">{{onebook.autor}}</h5>
+              <p class="card-text text-center" id="trama1">{{onebook.trama}}</p>
+              <hr>
+              <p class="card-text text-center">{{onebook.genero}}</p>
+              <p class="card-text text-end"><h5>Valoración:&nbsp; {{onebook.opinion}}</h5></p>
+              <div class="position-absolute bottom-0 start-50 translate-middle">
+              
+                <a  href="/home">
+                <button class="btn btn-primary" id="closeView">cerrar</button>
+              
+                </a>  
+              
+              
+              </div>
             </div>
-            
-        </div>
-    </div>
-</div>
+   </div>
+   
+    </div>     
+   </div>
+
+</body>
