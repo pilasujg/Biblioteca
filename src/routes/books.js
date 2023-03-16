@@ -78,7 +78,7 @@ router.get('/books/view/:id', async (req, res) => {
 // listar libros
 router.get('/books/listado', async (req, res) => {
     const db = req.app.db;
-    let books = await db.books.find({}).toArray();
+    let books = await db.books.find({}).sort({titulo:1}).toArray();
     console.log(books);
     console.log('hola');
     

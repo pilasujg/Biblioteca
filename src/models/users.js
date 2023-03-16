@@ -8,14 +8,14 @@ password: {type: String, required: true}
 }, {
     timestamps:true
 });
-userSchema.methods.encryPassword = async password => {
+/*userSchema.methods.encryPassword = async password => {
     const salt = await bcrypt.genSalt(10);
    return await bcrypt.hash(password, salt);
 };
 userSchema.methods.matchPassword = async function (password) {
-    return await bcrypt.compare(password, this.password);
+    return await bcrypt.word, this.password);
 };
 
-
+*/
 
 export default model ("User", userSchema)

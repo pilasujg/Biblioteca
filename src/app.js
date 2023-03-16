@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 import db from "./lib/db.js";
 import index from './routes/index.js'
 import books from './routes/books.js'
-//import users from './routes/users.js'
+import users from './routes/users.js'
 
 import config from './config.js'
 
@@ -21,10 +21,13 @@ import config from './config.js'
 // inicializaciones
 
 const app = express();
-
+// Create an express app
 const __filename = fileURLToPath(import.meta.url);
-
+// Create a variable to store the path to the file
 const __dirname = path.dirname(__filename);
+// Create a variable to store the directory path
+
+
 // settings
 
 
@@ -83,14 +86,14 @@ app.use((req, res, next) => {
 // routes
 
 app.use('/', index);
-//app.use('/', users);
+app.use('/', users);
 
 app.use('/', books);
-//app.use('/', users);
 
 
 
-// Path: scr/routes.js
+
+
 app.db = db;
 app.config = config;
 app.handlebars = handlebars;

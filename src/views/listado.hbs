@@ -1,4 +1,5 @@
 
+
 <link rel="stylesheet" href="/css/main.css">
 
 <div class="container-fluid">
@@ -7,9 +8,9 @@
             <h1 class="text-center">Busca tu libro</h1>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3 p-3">
         <div class="col-sm-12">
-            <table>
+            <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -25,11 +26,11 @@
     {{#each books}}
     <tr>
       <th scope="row">1</th>
-      <td>{{doc.titulo}}</td>
-      <td>{{doc.autor}}</td>
-      <td>{{doc.genero}}</td>
-      <td>{{doc.opinion}}</td>
-       <td><a href="/editar/{{doc.id}}">Editar</a></td>
+      <td>{{titulo}}</td>
+      <td>{{autor}}</td>
+      <td class="text-capitalize">{{genero}}</td>
+      <td>{{opinion}}</td>
+       <td><a href="/books/edit/{{_id}}">Editar</a></td>
     <td><a href="/eliminar/{{doc.id}}">Eliminar</a></td>
     {{/each}}
     </tr>

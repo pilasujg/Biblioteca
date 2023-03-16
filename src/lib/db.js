@@ -30,5 +30,6 @@ let dbUrl =
   
 const db = mongoose.connection;
 db.books = db.collection('books');
+db.users = db.collection('users');
 export default db;
 

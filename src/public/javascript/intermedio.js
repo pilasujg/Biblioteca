@@ -1,8 +1,10 @@
-     import $ from 'jquery';
-        
+
+$(document).ready(function () {
+    console.log("ready!");
+    $('#guardarBook').click(function () {
 
     
-      $(document).on('click', '#guardarBook', function (e) {
+ 
         let trama = $('#trama').val();
         let opinion = $('#opinion').val();
         let titulo = $('#titulo').val();
@@ -35,6 +37,7 @@
             });
 
     });
+});
 
     $(document).on('click', '#editarBook', function (e) {
         let trama = $('#trama').val();

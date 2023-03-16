@@ -1,0 +1,27 @@
+
+<!-- crear cuenta -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="text-center">Crear cuenta</h1>
+        </div>
+    </div>
+    <form action="/users/signup" method="POST"> 
+        <div class="col-8 mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="">
+            <label for="password2" class="form-label">Repite la contraseña</label>
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="">
+            <button class="btn btn-primary btn-block" type="submit" id="guardarUser">Guardar</button>
+            
+        </div>
+    </form>
+
+</div>
+
+
