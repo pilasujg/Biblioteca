@@ -5,6 +5,7 @@ let  handlebars  = myhandlebars;
 import path from "path";
 import morgan from "morgan";
 import methodOverride from "method-override";
+import flash from "connect-flash";
 import { fileURLToPath } from 'url';
 import db from "./lib/db.js";
 import index from './routes/index.js'
@@ -46,7 +47,7 @@ app.set("view engine", ".hbs");
 // middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -87,7 +88,6 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/', users);
-
 app.use('/', books);
 
 

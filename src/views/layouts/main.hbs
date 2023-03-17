@@ -14,9 +14,11 @@
  <script type="text/javascript" src="/javascript/intermedio.js"></script>
 </head>
 <body>
-    {{> navbar}}
+    {{>navbar}}
    
-<div class="container-fluid">
+    {{>error_msg}}
+    {{>success_msg}}
+    
 
     {{{body}}}
 </div>

@@ -60,25 +60,38 @@ router.post('/users/login', async (req, res) => {
     const db = req.app.db;
     let email = req.body.email;
     let password = req.body.password;
-   //comparar password con database 
-  let user = await db.users.findOne({email: email}, function (err, user) {
-        if (err) {
-            console.log(err);
+    let error_msg = [];
+    let success_msg = [];
+    //comprobar que el email existe
+  let user = await db.users.findOne({email: email}) 
+  bcrypt.compare(password, user.password).then(function (result, err) {
+    if (result == true) {
+       success_msg.push({ text: 'Bienvenido' });
+       console.log('Bienvenido')
+        res.render('listado');
+    } else {
+        // imprimir alerta de password incorrecto
+       error_msg.push({ text: 'Password incorrecto' }); 
         }
-        if (!user) {
-            console.log('User not found.');
-        }
-        if (user) {
-            bcrypt.compare(password, user.password).then(function (result, err) {
-                if (result == true) {
-                    console.log('Password is correct.')
-                    res.redirect('/home');
-                } else {
-                    res.render('users/login');
-                }
-            });
-        }
+
+       
     });
+    if (error_msg.length > 0) {
+        res.render('login/signin', {
+            title: 'Login',
+            error_msg: error_msg,
+            helpers: req.handlebars.helpers
+        });
+    }
+    if (success_msg.length > 0) {
+        res.render('listado', {
+            title: 'Login',
+            success_msg: success_msg,
+            helpers: req.handlebars.helpers
+        });
+
+        }
+    
    
 });
 
