@@ -3,10 +3,10 @@ const router = express.Router();
 import { default as mongodb } from 'mongodb';
 import { default as mongoose } from 'mongoose';
 import { Schema } from 'mongoose';
-import { getId } from '../models/common.js';
+
 import dotenv from 'dotenv'
 import { ObjectId } from 'mongodb';
-import { default as book } from '../models/book.js';
+
 
 dotenv.config()
 
@@ -68,9 +68,8 @@ router.get('/books/view/:id', async (req, res) => {
     res.render('view', {
         title: 'VIEW',
         onebook:onebook,
-        helpers: req.handlebars.helpers
-
-        // session: req.session,
+        helpers: req.handlebars.helpers,
+       
     });
     console.log(onebook)
 });
@@ -87,8 +86,8 @@ router.get('/books/listado', async (req, res) => {
     res.render('listado', {
         title: 'BOOKS',
         books: books,
-        helpers: req.handlebars.helpers
-        // session: req.session,
+        helpers: req.handlebars.helpers,
+        session: req.session,
     });
 });
 

@@ -18,7 +18,7 @@ router.get('/home',async (req, res) => {
         title: 'HOME',
         libros: todos,
        
-       // session: req.session,
+      session: req.session,
     helpers: req.handlebars.helpers,
        config: req.app.config,
     });
@@ -28,7 +28,8 @@ router.get('/home',async (req, res) => {
 router.get('/books/add', (req, res) => {
   res.render('add', {
       title: 'Nuevo libro',
-       // session: req.session,
+       session: req.session,
+      helpers: req.handlebars.helpers
 
   });
 });

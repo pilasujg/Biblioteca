@@ -9,60 +9,8 @@
         <a class="nav-link active" aria-current="page" href="/home">Home</a>
         <a class="nav-link" href="/books/add">Añadir libro</a>
         <a class="nav-link" href="/books/listado">Listado</a>
-         <button type="button" class="btn btn-mute btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal">
-  login
-</button> 
+         <a class="nav-link" href="/login">Login</a>
       </div>
     </div>
   </div>
 </nav>
-<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-       <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Inicia sesión</h4>
-        </div>
-      <div class="modal-body">     
-        <form action="/login" method="POST">
-          <div class="col-8 mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="">
-            
-          </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-        <button type="button" type="submit" class="btn btn-primary" id="login">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-
-    $('#login').click(function(){
-        $.ajax({
-        url: '/users/login',
-        type: 'POST',
-        data: {
-            email: $('#email').val(),
-            password: $('#password').val()
-        },
-        success: function (data) {
-            console.log(data)
-         
-            $('#basicModal').modal('hide');
-        },
-        error: function (data) {
-            console.log(data)
-           
-            $('#basicModal').modal('hide');
-        }
-    });
-    });
-        
-
-</script>

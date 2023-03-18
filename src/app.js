@@ -6,6 +6,7 @@ import path from "path";
 import morgan from "morgan";
 import methodOverride from "method-override";
 import flash from "connect-flash";
+import session from 'express-session';
 import { fileURLToPath } from 'url';
 import db from "./lib/db.js";
 import index from './routes/index.js'
@@ -47,8 +48,10 @@ app.set("view engine", ".hbs");
 // middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(flash());
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/images')));
+app.use(express.static(path.join(__dirname, 'public/javascripts')));
 
 
 
@@ -56,6 +59,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan("dev"));
 app.use(express.urlencoded({extended:false}));
 app.use(methodOverride("_method"));
+app.use(session({
+    secret: 'mysecretapp',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash());
+
 
 handlebars = handlebars.create({
     helpers: {
@@ -79,11 +89,22 @@ startsWithHttp: (image) => {
 }
 });
 
-//fallo en la ruta???
+// global variables
 app.use((req, res, next) => {
     req.handlebars = handlebars;
     next();
 });
+
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+
+
+
 // routes
 
 app.use('/', index);

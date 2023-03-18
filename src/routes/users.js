@@ -7,7 +7,11 @@ import { getId } from '../models/common.js';
 import dotenv from 'dotenv'
 import { ObjectId } from 'mongodb';
 import { default as book } from '../models/book.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
+
+
+
+
 
 dotenv.config()
 
@@ -48,35 +52,52 @@ router.post('/users/signup', async (req, res) => {
 });
 
 //login users
-router.get('/users/login', (req, res) => {
-
+router.get('/login', (req, res) => {
     res.render('login/signin', {
         title: 'Login',
         helpers: req.handlebars.helpers
     });
 });
 
-router.post('/users/login', async (req, res) => {
+
+router.post('/users/login', async (req,res) => {
     const db = req.app.db;
-    let email = req.body.email;
+   let email = req.body.email;
     let password = req.body.password;
     let error_msg = [];
     let success_msg = [];
     //comprobar que el email existe
   let user = await db.users.findOne({email: email}) 
-  bcrypt.compare(password, user.password).then(function (result, err) {
-    if (result == true) {
-       success_msg.push({ text: 'Bienvenido' });
-       console.log('Bienvenido')
-        res.render('listado');
-    } else {
-        // imprimir alerta de password incorrecto
-       error_msg.push({ text: 'Password incorrecto' }); 
-        }
+  console.log(user)
+  if(!user){
 
-       
+    console.log("Email bad")
+    req.flash('error_msg', 'Email is not registered');
+    
+    res.redirect('/signup');
+  }
+  if(user){
+    //comprobar que el password es correcto
+    console.log(user.password)
+    console.log(password)
+  bcrypt.compare(password, user.password)
+  .then(async (result) => {
+        console.log(result)
+    if(result === true){
+        console.log("Password good")
+        req.flash('success_msg', 'You are logged in');
+        res.redirect('/home');
+    } else {
+        console.log("Password bad")
+        req.flash('error_msg', 'Password is incorrect');
+        res.redirect('/home');
+    }
     });
-    if (error_msg.length > 0) {
+    }
+});
+    
+
+/*    if (error_msg.length > 0) {
         res.render('login/signin', {
             title: 'Login',
             error_msg: error_msg,
@@ -88,12 +109,11 @@ router.post('/users/login', async (req, res) => {
             title: 'Login',
             success_msg: success_msg,
             helpers: req.handlebars.helpers
-        });
-
-        }
+        */    
+       
     
    
-});
+
 
 
 router.post('/saveUser', async (req, res) => {

@@ -1,9 +1,11 @@
-{{#each success_msg}}
-<div class="alert alert-success alert-dimissible fade-show " role="alert">
+{{#if success_msg}}
+
+<div class="alert alert-success alert-dimissible fade show " role="alert">
     {{success_msg}}
+    </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <span aria-hidden="true">&times;</span>
-</div>
-{{/each}}
+
+{{/if}}
 
 

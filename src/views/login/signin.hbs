@@ -1,63 +1,64 @@
+<style>
+.bg-image-vertical {
+position: relative;
+overflow: hidden;
+background-repeat: no-repeat;
+background-position: right center;
+background-size: auto 100%;
+}
 
-{{! Path: src/views/login/signin.hbs }}
-<!--create button to open modal-->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
-  Launch demo modal
-</button>
+@media (min-width: 1025px) {
+.h-custom-2 {
+height: 100%;
+}
+}
+</style>
 
 
-<!--create a modal login form-->
+<section class="vh-100">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 text-black">
 
+        <div class="px-5 ms-xl-4">
+          <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+          <span class="h1 fw-bold mb-0">Logo</span>
+        </div>
 
-<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Basic Modal</h4>
+        <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+
+          <form action="/users/login" method="POST" style="width: 23rem;">
+
+            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+
+            <div class="form-outline mb-4">
+              <input type="email" id="email" name="email" class="form-control form-control-lg" />
+              <label class="form-label" for="email">Email address</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="password" name="password" class="form-control form-control-lg" />
+              <label class="form-label" for="password">Password</label>
+            </div>
+
+            <div class="pt-1 mb-4">
+              <button class="btn btn-info btn-lg btn-block" type="submit" id="signin">Login</button>
+            </div>
+
+            <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
+            <p>¿No tienes una cuenta? <a href="/signup" class="link-info">Registrate aquí</a></p>
+
+          </form>
+
+        </div>
+
       </div>
-      <div class="modal-body">
-        <h3>Credenciales</h3>
-        <form action="/login" method="POST">
-          <div class="col-8 mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="">
-            
-          </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-        <button type="button" type="submit" class="btn btn-primary" id="login">Save changes</button>
+      <div class="col-sm-6 px-0 d-none d-sm-block">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
+          alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
       </div>
     </div>
   </div>
-</div>
+</section>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-
-    $('#login').click(function(){
-        $.ajax({
-        url: '/users/login',
-        type: 'POST',
-        data: {
-            email: $('#email').val(),
-            password: $('#password').val()
-        },
-        success: function (data) {
-            console.log(data)
-         
-            $('#basicModal').modal('hide');
-        },
-        error: function (data) {
-            console.log(data)
-           
-            $('#basicModal').modal('hide');
-        }
-    });
-    });
-        
-
-</script>
+ <script type="text/javascript" src="/javascript/intermedio.js"></script>
