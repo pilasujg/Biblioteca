@@ -1,19 +1,24 @@
-
+<style>
+  .table {
+   margin: auto;
+   width: 70% !important; 
+}
+</style>
 
 <link rel="stylesheet" href="/css/main.css">
 
 <div class="container-fluid">
     <div class="row mt-4">
-        <div class="col-sm-12">
-            <h1 class="text-center">Busca tu libro</h1>
+        <div class="col-sm-10">
+            <h1 class="text-center">La lectura es para la mente lo que el ejercicio al cuerpo</h1>
         </div>
     </div>
     <div class="row mt-3 p-3">
-        <div class="col-sm-12">
+        <div class="col-sm-10">
             <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      
       <th scope="col">Título</th>
       <th scope="col">Autor</th>
       <th scope="col">Género</th>
@@ -25,7 +30,7 @@
   <tbody>
     {{#each books}}
     <tr>
-      <th scope="row">1</th>
+     
       <td>{{titulo}}</td>
       <td>{{autor}}</td>
       <td class="text-capitalize">{{genero}}</td>
