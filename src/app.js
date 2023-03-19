@@ -9,10 +9,11 @@ import flash from "connect-flash";
 import session from 'express-session';
 import { fileURLToPath } from 'url';
 import db from "./lib/db.js";
-import index from './routes/index.js'
-import books from './routes/books.js'
-import users from './routes/users.js'
-
+import index from './routes/index.js';
+import books from './routes/books.js';
+import users from './routes/users.js';
+import MongoStore from 'connect-mongo';
+import { default as connectMongoDBSession} from 'connect-mongodb-session';
 import config from './config.js'
 
 
@@ -59,11 +60,21 @@ app.use(express.static(path.join(__dirname, 'public/javascripts')));
 app.use(morgan("dev"));
 app.use(express.urlencoded({extended:false}));
 app.use(methodOverride("_method"));
+const MongoDBStore = connectMongoDBSession(session);
+let url = process.env.MONGO_URI_LOCAL;
 app.use(session({
     secret: 'mysecretapp',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoDBStore({
+        uri:  url,
+        autoReconnect: true,
+        collection: 'sessions'
+      })
+
 }));
+
+
 app.use(flash());
 
 

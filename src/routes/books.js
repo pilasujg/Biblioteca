@@ -17,6 +17,8 @@ dotenv.config()
 
 router.post('/saveBook', async (req, res) => {
     const db = req.app.db;
+    let error_msg = [];
+    let success_msg = [];
     let trama = req.body.trama;
     let opinion = req.body.opinion;
     let titulo = req.body.titulo;
@@ -33,11 +35,11 @@ router.post('/saveBook', async (req, res) => {
         imagen: imagen,
         fecha: date
     });
-       
-        
+    
 
+    req.flash('success_msg', 'Libro guardado!');
     res.redirect('/home');
-   
+ 
    
 });
 
@@ -51,9 +53,8 @@ router.get('/books/edit/:id', async (req, res) => {
     res.render('edit', {
         title: 'EDIT',
         onebook:onebook,
-        helpers: req.handlebars.helpers
-
-        // session: req.session,
+        helpers: req.handlebars.helpers,
+        session: req.session,
     });
     console.log(onebook)
 });
@@ -69,6 +70,7 @@ router.get('/books/view/:id', async (req, res) => {
         title: 'VIEW',
         onebook:onebook,
         helpers: req.handlebars.helpers,
+        session: req.session,
        
     });
     console.log(onebook)

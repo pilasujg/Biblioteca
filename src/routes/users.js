@@ -8,6 +8,7 @@ import dotenv from 'dotenv'
 import { ObjectId } from 'mongodb';
 import { default as book } from '../models/book.js';
 import bcrypt from 'bcryptjs';
+import session from 'express-session';
 
 
 
@@ -28,34 +29,51 @@ router.get('/signup', (req, res) => {
 
 router.post('/users/signup', async (req, res) => {
     const db = req.app.db;
+    let error_msg = [];
+    let success_msg = [];
     let nombre = req.body.nombre;
     let email = req.body.email;
     let password = req.body.password;
     let password2 = req.body.password2;
     // coincidir password y password1
     if (password != password2) {
-        res.redirect('/users/signup');
-    }
-    // encriptar password
+        req.flash('error_msg', 'Passwords do not match');
+        res.redirect('/signup');
+    }else{
+    //comprobar que el email existe
+    let user = await db.users.findOne({email: email})
+    console.log(user)
+     if(user){
+         req.flash('error_msg', 'Email already registered');
+         res.redirect('/login');
+     }
+    if(!user){
+        // encriptar password
+        let cripPass = await bcrypt.hash(password, 8);
+        let date = new Date();
+
+        await db.users.insertOne({
+            nombre: nombre,
+            email: email,
+            password: cripPass,
+            fecha: date
+        });
+        req.flash('success_msg', '¡Enhorabuena, te has registrado!');
+        res.redirect('/home');
+        req.session.name = nombre;
+        req.session.email = email;
     
-    let cripPass = bcrypt.hashSync(password, 10);
-
-
-    let date = new Date();
-    await db.users.insertOne({
-        nombre: nombre,
-        email: email,
-        password: cripPass,
-        fecha: date
-    });
-    res.redirect('/home');
+        }
+    
+    }
 });
 
 //login users
 router.get('/login', (req, res) => {
     res.render('login/signin', {
         title: 'Login',
-        helpers: req.handlebars.helpers
+        helpers: req.handlebars.helpers,
+        session: req.session
     });
 });
 
@@ -90,45 +108,19 @@ router.post('/users/login', async (req,res) => {
     } else {
         console.log("Password bad")
         req.flash('error_msg', 'Password is incorrect');
-        res.redirect('/home');
+        res.redirect('/login');
     }
     });
     }
-});
-    
-
-/*    if (error_msg.length > 0) {
-        res.render('login/signin', {
-            title: 'Login',
-            error_msg: error_msg,
-            helpers: req.handlebars.helpers
-        });
-    }
-    if (success_msg.length > 0) {
-        res.render('listado', {
-            title: 'Login',
-            success_msg: success_msg,
-            helpers: req.handlebars.helpers
-        */    
-       
-    
+       req.session.name = user.nombre;
+       req.session.email = user.email;
+        });   
    
-
-
-
-router.post('/saveUser', async (req, res) => {
-    const db = req.app.db;
-    let nombre = req.body.nombre;
-    let email = req.body.email;
-    let password = req.body.password;
-    let date = new Date();
-    await db.users.insertOne({
-        nombre: nombre,
-        email: email,
-        password: password,
-        fecha: date
-    });
-    res.redirect('/home');
+//logout users
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/login');
 });
+
 
 export default router;

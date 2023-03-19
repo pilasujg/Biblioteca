@@ -13,3 +13,7 @@ import config from "./config.js";
     }
 }
 )();
+
+dbUrl = getDbUri(dbUrl);
+
+
