@@ -102,9 +102,18 @@ router.post('/books/opinion', async (req, res) => {
     console.log(id)
     let opinion = req.body.opinion;
     let date = new Date();
+    let yaOpinion = await db.opiniones.findOne({libro: ObjectId(id), "opiniones.idLector": lectorId});
+    if(yaOpinion){
+        req.flash('error_msg', 'Ya has opinado sobre este libro!');
+        res.redirect('/home');
+       
+    } else {
+
+
     await db.opiniones.findOneAndUpdate({libro: ObjectId(id)}, {$push: {opiniones: {opinion: opinion, idLector:lectorId, lector: lector.nombre, fecha: date}}},{ upsert: true });
     req.flash('success_msg', 'Opinion guardada!');
     res.redirect('/home');
+    }
 });
 
 

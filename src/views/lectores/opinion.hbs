@@ -1,24 +1,39 @@
+<style>
+  .card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    width: 200  px;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
 
-<row class="row">
-  <div class="col-sm-6 d-sm-block text-black p-5">
+  }
+</style>
+
+<div class="container">
+<row class="row d-flex align-content-center">
+  <div class="col-sm-8 d-sm-block text-black p-5">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Opinión</h5>
         
-        <p class="card-text h-4">Deja tu comentario</p>
+        <p class="card-text h-10">Deja tu comentario</p>
         <form action="/books/opinion" method="POST">
           <input type="hidden" name="id" id="libroId" value="{{id}}">
           <input type="hidden" name="lector" id="lector" value="{{@root.session.lectorId}}">
-          <div class="form-floating">
-            <textarea class="form-control" placeholder="Deja tu comentario" name="opinion" id="opinion"></textarea>
-            <label for="floatingTextarea">Comments</label>
+          <div class="form-control">
+            <textarea class="form-control my-3" placeholder="Deja tu comentario" name="opinion" id="opinion" rows="8" ></textarea>
+           
           </div>
-          <div class="form-floating">
+          <div class="form-control my-5">
+            <label for="floatingInput">Valoración</label>
             <input type="number" class="form-control" id="floatingInput" placeholder="Ranking">
-            <label for="floatingInput">Ranking</label>
+            
           </div>
           <button type="submit" class="btn btn-primary btn-block">Enviar</button>
         </form>
       </div>
     </div>
   </div>
+</div>
