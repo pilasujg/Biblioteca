@@ -76,11 +76,46 @@ router.get('/books/view/:id', async (req, res) => {
     console.log(onebook)
 });
 
+
+// rutas para opinion libros
+
+router.get('/books/opinion/:id', async (req, res) => {
+    const db = req.app.db;
+    const id = req.params.id;
+    console.log(id)
+    res.render('lectores/opinion', {
+        title: 'OPINION',
+        id: id,
+        helpers: req.handlebars.helpers,
+        session: req.session,
+        });
+});
+
+
+router.post('/books/opinion', async (req, res) => {
+    const db = req.app.db;
+    const id = req.body.id;
+    const lectorId = req.session.lectorId;
+    
+    let lector = await db.users.findOne({_id: ObjectId(lectorId)});
+    console.log(lector)
+    console.log(id)
+    let opinion = req.body.opinion;
+    let date = new Date();
+    await db.opiniones.findOneAndUpdate({libro: ObjectId(id)}, {$push: {opiniones: {opinion: opinion, idLector:lectorId, lector: lector.nombre, fecha: date}}},{ upsert: true });
+    req.flash('success_msg', 'Opinion guardada!');
+    res.redirect('/home');
+});
+
+
+
 // listar libros
 router.get('/books/listado', async (req, res) => {
     const db = req.app.db;
+    let lectorId = req.session.lectorId;
+    console.log(lectorId)
     let books = await db.books.find({}).sort({titulo:1}).toArray();
-    console.log(books);
+    
     console.log('hola');
     
     

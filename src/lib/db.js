@@ -32,6 +32,7 @@ const db = mongoose.connection;
 db.books = db.collection('books');
 db.users = db.collection('users');
 db.sessions = db.collection('sessions');
+db.opiniones = db.collection('opiniones');
 
 export default db;
 

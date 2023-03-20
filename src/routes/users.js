@@ -37,14 +37,14 @@ router.post('/users/signup', async (req, res) => {
     let password2 = req.body.password2;
     // coincidir password y password1
     if (password != password2) {
-        req.flash('error_msg', 'Passwords do not match');
+        req.flash('error_msg', 'Las contraseñas no coinciden');
         res.redirect('/signup');
     }else{
     //comprobar que el email existe
     let user = await db.users.findOne({email: email})
     console.log(user)
      if(user){
-         req.flash('error_msg', 'Email already registered');
+         req.flash('error_msg', 'Email ya registrado');
          res.redirect('/login');
      }
     if(!user){
@@ -59,9 +59,11 @@ router.post('/users/signup', async (req, res) => {
             fecha: date
         });
         req.flash('success_msg', '¡Enhorabuena, te has registrado!');
-        res.redirect('/home');
+        res.redirect('/login');
         req.session.name = nombre;
         req.session.email = email;
+        req.session.lectorLogado = true;
+       
     
         }
     
@@ -112,8 +114,10 @@ router.post('/users/login', async (req,res) => {
     }
     });
     }
+        req.session.lectorLogado = true;
        req.session.name = user.nombre;
        req.session.email = user.email;
+         req.session.lectorId = user._id;
         });   
    
 //logout users

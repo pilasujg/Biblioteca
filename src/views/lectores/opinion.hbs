@@ -1,0 +1,24 @@
+
+<row class="row">
+  <div class="col-sm-6 d-sm-block text-black p-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Opinión</h5>
+        
+        <p class="card-text h-4">Deja tu comentario</p>
+        <form action="/books/opinion" method="POST">
+          <input type="hidden" name="id" id="libroId" value="{{id}}">
+          <input type="hidden" name="lector" id="lector" value="{{@root.session.lectorId}}">
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Deja tu comentario" name="opinion" id="opinion"></textarea>
+            <label for="floatingTextarea">Comments</label>
+          </div>
+          <div class="form-floating">
+            <input type="number" class="form-control" id="floatingInput" placeholder="Ranking">
+            <label for="floatingInput">Ranking</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>

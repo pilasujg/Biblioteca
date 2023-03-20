@@ -40,8 +40,9 @@
    
      {{#each libros}}          
            
-      <div class="card col-2 mx-2 h-40 my-2" style="width: 18rem;">
-  
+      <div class="card col-3 mx-2 h-50 my-2">
+          <input type="hidden" name="id" id="bookId" value="{{_id}}">
+          <input type="hidden" name="lector" id="lector" value="{{@root.session.lectorId}}">
         <div class="card-header">
           <a>
           <img src="{{imagen}}" class="card-img-top img-fluid" style="border-radius: 20px;height:150px;min-width:150px;" alt="{{doc.image}}">
@@ -52,8 +53,10 @@
           <h4 class="card-title text-center">{{titulo}}</h4>
           <h6 class="card-title text-center">{{autor}}</h6>
           <p class="card-text text-center" id="trama1">{{truncate trama}}</p>
-          <p class="card-text text-center">{{genero}}</p>
-          <p class="card-text">Ranking&nbsp; {{opinion}}</p>
+          <p class="card-text text-center"><strong>{{genero}}</strong></p>
+          <p class="card-text text-start">Ranking&nbsp; {{opinion}}
+            <a class="text-end" href="/books/opinion/{{_id}}">tu opinión</a>
+          </p>
           <div class="position-absolute bottom-0 start-50 translate-middle">
             <!-- Button open overlay -->
             <a  href="/books/view/{{_id}}">
@@ -67,7 +70,18 @@
    </div>
 
 {{/each}}
+<div class="col-2 mx-2 h-40 my-2">
+   <div class="nav nav-pills nav-stacked">
+        <div class="">
+      <h5>Un lector vive mil vidas antes de morir. El que nunca lee, solo vive una</h5>
+      
+    </div>
+    
   </div>
+
+</div>
+  </div>
+  
         </div>
         </div>
  </div>     
