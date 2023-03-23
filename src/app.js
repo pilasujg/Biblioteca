@@ -62,6 +62,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(methodOverride("_method"));
 const MongoDBStore = connectMongoDBSession(session);
 let url = process.env.MONGO_URI_LOCAL;
+let api = process.env.GOOGLE_API_KEY;
 app.use(session({
     secret: 'mysecretapp',
     resave: true,

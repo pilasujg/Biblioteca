@@ -3,7 +3,7 @@ const router = express.Router();
 import { default as mongodb } from 'mongodb';
 import { default as mongoose } from 'mongoose';
 import { Schema } from 'mongoose';
-
+import axios from 'axios';
 import dotenv from 'dotenv'
 import { ObjectId } from 'mongodb';
 
@@ -136,6 +136,21 @@ router.get('/books/listado', async (req, res) => {
         session: req.session,
     });
 });
+
+// crear ruta para la API google books
+router.get('/books/search', async (req, res) => {
+    const db = req.app.db;
+    let lectorId = req.session.lectorId;
+    console.log(lectorId)
+    res.render('buscador', {
+        title: 'SEARCH',
+        helpers: req.handlebars.helpers,
+        session: req.session,
+        });
+})
+
+
+
 
 
 
