@@ -45,26 +45,24 @@
           <input type="hidden" name="lector" id="lector" value="{{@root.session.lectorId}}">
         <div class="card-header">
           <a>
-          <img src="{{imagen}}" class="card-img-top img-fluid" style="border-radius: 20px;height:150px;min-width:150px;" alt="{{doc.image}}">
+          <img src="{{imagen}}" class="card-img-top img-fluid" style="border-radius: 20px;height:150px;min-width:200px;" alt="{{doc.image}}">
           </a>
         </div>
   
-        <div class="card-body overflow-auto" style="border-radius: 20px;height:250px;min-width:150px;">
+        <div class="card-body overflow-auto" style="border-radius: 20px;height:300px;min-width:200px;">
           <h4 class="card-title text-center">{{titulo}}</h4>
           <h6 class="card-title text-center">{{autor}}</h6>
           <p class="card-text text-center" id="trama1">{{truncate trama}}</p>
           <p class="card-text text-center"><strong>{{genero}}</strong></p>
-          <p class="card-text text-start">Ranking&nbsp; {{opinion}}
-            <a class="text-end" href="/books/opinion/{{_id}}">tu opinión</a>
+          <p class="card-text text-start">Ranking&nbsp;{{opinion}} &nbsp; &nbsp; 
+            <a class="card-text start-100" href="/books/opinion/{{_id}}">opina</a>
           </p>
           <div class="position-absolute bottom-0 start-50 translate-middle">
             <!-- Button open overlay -->
             <a  href="/books/view/{{_id}}">
             <button class="btn btn-primary" id="viewBook">Ver</button>
           
-            </a>  
-           
-          
+            </a>             
           </div>
         </div>
    </div>

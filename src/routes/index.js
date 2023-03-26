@@ -11,7 +11,16 @@ dotenv.config()
 
 router.get('/home',async (req, res) => {
     const db = req.app.db;
-      const todos = await db.books.find({}).toArray()
+    let media
+    
+      let todos = await db.books.aggregate([
+       
+     
+      {$project: {titulo: 1, autor: 1, genero: 1, imagen: 1, trama: 1, opinion: {$avg: '$opinion'}, fecha: 1, _id: 1}},
+  
+      ]).toArray()
+console.log(todos)
+      
 
     res.render('home', {
 
